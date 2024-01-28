@@ -17,9 +17,6 @@ public class autoMobiles {
 		autoYear.add(carYear);
 	}
 	
-	int carFoundAt;
-	String uodateWhat;
-	
 	public void displayVehicle(String carMake) {
 		for(int i = 0; i < autoMake.size(); ++i) {
 			if(autoMake.get(i).equalsIgnoreCase(carMake)) {
@@ -34,9 +31,9 @@ public class autoMobiles {
 		}
 	}
 	
-	public void updateVehicle(String carMake, String carModel, String carColor, String carYear) {
+	public void updateVehicle(String oldMake, String carMake, String carModel, String carColor, String carYear) {
 		for(int i = 0; i < autoMake.size(); ++i) {
-			if(autoMake.get(i).equalsIgnoreCase(carMake)) {
+			if(autoMake.get(i).equalsIgnoreCase(oldMake)) {
 				autoMake.set(i, carMake);
 				autoModel.set(i, carModel);
 				autoColor.set(i, carColor);

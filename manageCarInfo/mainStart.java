@@ -9,6 +9,7 @@ public class mainStart {
 		
 		autoMobiles autoMobile1 = new autoMobiles();
 		
+		String oldMake;
 		String newModel;
 		String newMake;
 		String newColor;
@@ -55,13 +56,16 @@ public class mainStart {
 					case("Update"):
 						do {
 							if(autoMobile1.autoMake.size()>0) {
-								System.out.println("Enter new make, model, color and year of car you want to update.");
+								System.out.println("Enter car make you want to update");
+								oldMake = scnr.next();
+								
+								System.out.println("Enter new car make, model, color and year of car you want to update.");
 								newMake = scnr.next();
 								newModel = scnr.next();
 								newColor = scnr.next();
 								newYear = scnr.next();
 								
-								autoMobile1.updateVehicle(newMake, newModel, newColor, newYear);
+								autoMobile1.updateVehicle(oldMake, newMake, newModel, newColor, newYear);
 								
 								System.out.println("If you are done updating vehicles type DONE. Otherwise click any key to continue with prompts.");
 								isDone = scnr.next();
