@@ -75,7 +75,17 @@ public class mainStart {
 							}
 						} while(true);
 					break;
-					
+					case("Remove"):
+						if(autoMobile1.autoMake.size()>0) {
+							System.out.println("Enter what make of car you want to remove");
+							newMake = scnr.next();
+							
+							autoMobile1.removeVehicle(newMake);
+						}
+						else {
+							System.out.println("No cars to remove.");
+						}
+					break;
 				}
 			}
 		} while(true);

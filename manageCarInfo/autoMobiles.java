@@ -27,6 +27,10 @@ public class autoMobiles {
 				System.out.println("All Cars found");
 				break;
 			}
+			else {
+				System.out.println("Car not found.");
+				break;
+			}
 		}
 	}
 	
@@ -40,6 +44,18 @@ public class autoMobiles {
 				System.out.println("Update Complete.");
 			}
 		}
-
 	}
+	
+	public void removeVehicle(String carMake) {
+		for(int i = 0; i < autoMake.size(); ++i) {
+			if(autoMake.get(i).equalsIgnoreCase(carMake)) {
+				autoMake.remove(i);
+				autoModel.remove(i);
+				autoColor.remove(i);
+				autoYear.remove(i);
+				System.out.println("Removal Complete.");
+			}
+		}
+	}
+	
 }
