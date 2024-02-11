@@ -8,6 +8,7 @@ public class mainStart {
 		Scanner scnr = new Scanner(System.in);
 		
 		autoMobiles autoMobile1 = new autoMobiles();
+		manageOptions optionManager = new manageOptions();
 		
 		String newModel;
 		String newMake;
@@ -17,43 +18,46 @@ public class mainStart {
 		String isDone;
 		String updateWhat;
 		int carNum;
-		String updateString;
-		int updateInteger;
-		char printToFile;
 		int optionSelect2;
+		char printToFile;
 		
 		do {
 			try {
 			System.out.println("What would you like to do? Enter one of the option numbers: \n 1. Add \n 2. Remove \n 3. Inventory \n 4. Update \n Or enter \"Complete\" to stop program.");
-			String optionSelect = scnr.next();
+			String optionSelect = scnr.next();//Getting user selection
 			
-			if (optionSelect.equalsIgnoreCase("Complete")) {
+			if (optionSelect.equalsIgnoreCase("Complete")) {//If user wants to end program
+				do {//Saving to file section
 				System.out.println("Would you like to save inventory in a text file? Enter Y or N");
+				
 				try {
-				printToFile = scnr.next().charAt(0);
-				if(printToFile == 'Y' || printToFile == 'y') {
-					System.out.println("Name the file: ");
-					String fileName = scnr.next();
-					System.out.println(autoMobile1.saveToFile(fileName));
-					System.out.println("End of program");
-					break;
-				}
-				else if(printToFile == 'N' || printToFile == 'n') {
-					System.out.println("End of program");
-					break;
-				}
-				else {
-					throw new Exception("Invalid option");
-				}
-				}catch(Exception j) {
+					printToFile = scnr.next().charAt(0);//Yes to save
+					if(printToFile == 'Y' || printToFile == 'y') {
+						System.out.println("Name the file: ");
+						String fileName = scnr.next();
+						String saved = autoMobile1.saveToFile(fileName);
+							System.out.println(saved);
+							System.out.println("\nEnd of program");
+						break;//breaking the saving to file do
+					}
+					else if(printToFile == 'N' || printToFile == 'n') {//No to save
+						System.out.println("End of program");
+						break;//breaking the saving to file do
+					}
+					else {
+						throw new Exception("Invalid option");
+					}
+				}catch(Exception j) {//invalid option message
 					System.out.println(j.getMessage());
 					System.out.println();
 				}
+				}while(true);
+				break;//breaking the main do to terminate program
 			}
 			else if (optionSelect.equals("1") || optionSelect.equals("2") || optionSelect.equals("3") || optionSelect.equals("4")){
 				switch(optionSelect) {
 					case("1")://Add option
-						do {
+						do {//will keep prompting to add another vehicle until user inputs "done"
 							System.out.println("Enter car information in the following order: make, model, color, year, and mileage. Only separated by a space.");
 							newMake = scnr.next();
 							newModel = scnr.next();
@@ -63,20 +67,21 @@ public class mainStart {
 				
 							autoMobile1.autoMobiles(newMake, newModel, newColor, newYear, newMileage);
 					
-							System.out.println("If you have no more vehicles to add type \"done\". Otherwise click any key to continue with prompts.");
+							System.out.println("If you have no more vehicles to add type \"done\". Otherwise type any letter to continue with prompts.");
+							
 							isDone = scnr.next();
 							if (isDone.equalsIgnoreCase("done")) {
 								break;
 							}
+							
 						} while (true);
 			
-						System.out.println("Adding Complete.");
 					break;
 					case("2")://Removal Option
 						try {
-						if(autoMobile1.autoMake.size() == 0) {
+						if(autoMobile1.autoMake.size() == 0) {//if there are no cars in the inventory
+							autoMobile1.autoMobiles();
 							throw new Exception("No cars to remove.");
-							
 						}
 						System.out.println("Enter car list number you want to remove");
 							carNum = scnr.nextInt();
@@ -97,15 +102,16 @@ public class mainStart {
 					case("4")://Update option
 						try {
 						do {
-								if(autoMobile1.autoMake.size() == 0) {
-									throw new Exception("No vehicles in inventory"); //This is wrong
-								}
+							if(autoMobile1.autoMake.size() == 0) {//if there are no cars in the inventory
+								autoMobile1.autoMobiles();
+								throw new Exception("No vehicles in inventory.");
+							}
 								System.out.println("Enter car list number you want to update.");
 								carNum = scnr.nextInt();
-								if (carNum > autoMobile1.autoMake.size() || carNum == 0) {
+								if (carNum > autoMobile1.autoMake.size() || carNum == 0) {//checks to see if user entered an actual list number
 									throw new Exception("Out of bounds of inventory");
 								}
-								System.out.println("Select what group of options you want 1 or 2. \n\t1: Make, Model, and Color\n\t2: Year and Mileage");
+								System.out.println("Select what group of options you want (1 or 2) \n\t1: Make, Model, and Color\n\t2: Year and Mileage");
 		
 								optionSelect2 = scnr.nextInt();
 								try {
@@ -113,14 +119,14 @@ public class mainStart {
 										System.out.println("Enter what you want to update. Options are: \"Make\", \"Model\", or \"Color\" (case-sensitive)");
 										updateWhat = scnr.next();
 										
-										autoMobile1.updateVehicleString(carNum, updateWhat);
+										System.out.println(autoMobile1.updateVehicleString(carNum, updateWhat));
+										
 									}
 									else if(optionSelect2 == 2) {
-										System.out.println("Enter what ou want to update: \"Year\" or \"Mileage\" ");
+										System.out.println("Enter what you want to update: \"Year\" or \"Mileage\" ");
 										updateWhat = scnr.next();
 							
-										
-										autoMobile1.updateVehicleInteger(carNum, updateWhat);
+										System.out.println(autoMobile1.updateVehicleInteger(carNum, updateWhat));
 									}
 									else {
 										throw new Exception("Invalid option.");
@@ -128,10 +134,10 @@ public class mainStart {
 								
 								}catch(Exception p) {
 									System.out.println(p.getMessage());
-									System.out.println("Try again.");
+									System.out.println("Will restart update process.");
 									System.out.println();
 								}
-								System.out.println("If you are done updating vehicles type DONE. Otherwise click any key to continue with prompts.");
+								System.out.println("\nIf you are done updating vehicles type DONE. Otherwise click any key to continue with prompts.");
 								isDone = scnr.next();
 								if (isDone.equalsIgnoreCase("done")) {
 									break;

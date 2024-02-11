@@ -26,36 +26,46 @@ public class autoMobiles {
 	ArrayList<Integer> autoYear = new ArrayList<Integer>();
 	ArrayList<Integer> autoMileage = new ArrayList<Integer>();
  	
-	public void autoMobiles() {
+	public void autoMobiles() {//default for when an empty inventory is trying to save
 		make = "None";
 		model = "None";
 		color = "None";
 		year = 0;
 		mileage = 0;
 		carNum = 0;
-		
-		printCar(carNum, make, model, color, year, mileage);
-	
 	}
 	
 		
-	public int autoMobiles(String carMake, String carModel, String carColor, int carYear, int carMileage) {
-		autoMake.add(carMake);
-		autoModel.add(carModel);
-		autoColor.add(carColor);
-		autoYear.add(carYear);
-		autoMileage.add(carMileage);
+	public int autoMobiles(String carMake, String carModel, String carColor, int carYear, int carMileage) {//adding car attributes to arrayLists
+		try {
+			if(carYear > 2025 || carYear < 1900) {
+				throw new Exception("Year of car is invalid.");
+			}
+			if(carMileage <= 0 || carMileage > 500000) {
+				throw new Exception("Mileage is invalid.");
+			}
+			autoMake.add(carMake);
+			autoModel.add(carModel);
+			autoColor.add(carColor);
+			autoYear.add(carYear);
+			autoMileage.add(carMileage);
 		
-		numOfCars = autoMake.size();
+			numOfCars = autoMake.size();
+			System.out.println("Adding Complete.\n");
+		
+		}catch(Exception a) {
+			System.out.println(a.getLocalizedMessage());
+			System.out.println("Could not add vehicle. Try again.\n");
+		}
 		return numOfCars;
 	}
 	
 		
-	public void getInventory() {
+	public void getInventory() {//This loops through arrayLists for printing
 		try {
 			numOfCars = 0;
 			if(autoMake.size() == 0) {
-				throw new Exception("No vehicles in inventory"); //This is wrong
+				throw new Exception("No vehicles in inventory"); //Empty inventory.
 			}
 			for(int i = 0; i < autoMake.size(); ++i) {
 				make = autoMake.get(i);
@@ -73,13 +83,13 @@ public class autoMobiles {
 			printCarsTotal(numOfCars);
 		}catch (Exception a) {
 			System.out.println(a.getMessage());
-			System.out.println("Select Add option to add to inventory.");
-			System.out.println();
+			System.out.println("Select Add option to add to inventory.\n");
+		
 		}
 	}
-	private String printCar(int carNum, String carMake, String carModel, String carColor, int carYear, int carMileage)
-	{
-		formattedCarPrint = "Car " + (carNum + 1) + ": \n\t Make: " + carMake +" \n\t Model: " + carModel +
+	
+	private String printCar(int carNum, String carMake, String carModel, String carColor, int carYear, int carMileage){//Prints cars with attributes in formatted way
+		formattedCarPrint = "\nCar " + (carNum + 1) + ": \n\t Make: " + carMake +" \n\t Model: " + carModel +
 				"\n\t Color: " + carColor + "\n\t Year: " + carYear + "\n\t Mileage: " + carMileage;
 		
 		System.out.println(formattedCarPrint);
@@ -87,19 +97,35 @@ public class autoMobiles {
 	}
 	
 	
-		public String updateVehicleInteger(int whichCar, String whatUpdate) {
+		public String updateVehicleInteger(int whichCar, String whatUpdate) {//Update a specific vehicle's year or mileage
+			isDone = "Process Not Complete!";
 			carNum = whichCar - 1;
 			try {
-				switch(whatUpdate){
+				if(carNum < 0 || carNum >= autoMake.size()-1) {//Making sure chosen car is within list size
+					throw new Exception("No Car is available by that List number.\n");
+				}
+				switch(whatUpdate){//Choose between the 2 integer arraylist
 					case("Year"):
 						System.out.println("Enter your new input");
+					
 						updateInteger = scnr.nextInt();
+						if(updateInteger > 2025 || updateInteger < 1900) {//Makes sure year is a valid or reasonable one
+							throw new Exception("Year of car is invalid.");
+						}
+						
 						autoYear.set(carNum, updateInteger);
+						isDone = "Update Complete!";
 					break;
 					case("Mileage"):
 						System.out.println("Enter your new input");
+					
 						updateInteger = scnr.nextInt();
+						if(updateInteger <= 0 || updateInteger > 500000) {//Makes sure mileage is valid or reasonable
+							throw new Exception("Mileage is invalid.");
+						}
+						
 						autoMileage.set(carNum, updateInteger);
+						isDone = "Update Complete!";
 					break;
 					default:
 						throw new Exception("Invalid update request. Reminder: options are case-sensitive");
@@ -108,12 +134,13 @@ public class autoMobiles {
 				System.out.println(excpt.getMessage());	
 				System.out.println("Can not complete update request.");
 			}
-			isDone = "Update Complete!";
 			return isDone;
 		}
 		
-	public String updateVehicleString(int whichCar, String whatUpdate) {
+	public String updateVehicleString(int whichCar, String whatUpdate) {//Update a specific vehicle's make, model, or color
+		isDone = "Process Not Complete!";
 		carNum = whichCar - 1;
+		
 		try {
 			switch(whatUpdate){
 		
@@ -135,55 +162,63 @@ public class autoMobiles {
 					autoColor.set(carNum, updateString);
 				break;
 				
-				default:
+				default://IF Make, Model, or Color isn't entered then its not a valid input
 					throw new Exception("Invalid update request. Reminder: options are case-sensitive");
 			}
+			
+			isDone = "Update Completed";
 		} catch (Exception excpt) {
 			System.out.println(excpt.getMessage());	
-			System.out.println("Can not complete update request.");
 		}
-		isDone = "Update Completed";
 		return isDone;
 	}
 	
-	public int removeVehicle(int whichCar) {
+	public int removeVehicle(int whichCar) {//removes a specific vehicle from list
 		carNum = whichCar - 1;
 		try {
+			if(carNum < 0 || carNum >= autoMake.size()-1) {//Checks if there are any cars in inventory
+				throw new Exception("No Car is available by that List number.\n");
+			}
 			autoMake.remove(carNum);
 			autoModel.remove(carNum);
 			autoColor.remove(carNum);
 			autoYear.remove(carNum);
 			autoMileage.remove(carNum);
 		
-		System.out.println("Removal Complete.");
-				
+		System.out.println("Removal Complete.\n");
 		numOfCars = autoMake.size();	
-		
-		} catch(ArrayIndexOutOfBoundsException e) {
-			System.out.println("No Car is available by that List number.");
+		} catch(Exception b) {
+			System.out.println(b.getLocalizedMessage());
 		}
 		return numOfCars;
 	}
 	
-	private void printCarsTotal(int numOfCars) {
+	private void printCarsTotal(int numOfCars) {//Gives total number of cars in inventory
 		this.numOfCars = numOfCars;
-		System.out.println("Total Number of Cars Now: " + this.numOfCars);
+		System.out.println("Total Number of Cars Now: " + this.numOfCars + "\n");
 	}
 	
-	public String saveToFile(String fileName) {
+	public String saveToFile(String fileName) {//prints inventory to file
+		isDone = "Process Not Complete!";
 		this.fileName = fileName;
 		try {
 			PrintWriter outputStream = new PrintWriter(this.fileName);
-		
-			for(int i = 0; i < autoMake.size(); ++i) {
-				make = autoMake.get(i);
-				model = autoModel.get(i);
-				color = autoColor.get(i);
-				year = autoYear.get(i);
-				mileage = autoMileage.get(i);
-				carNum = i;
-			
+			if (autoMake.size() == 0) {//if inventory is empty
+				autoMobiles();//running default method to print to file.
 				outputStream.println(printCar(carNum, make, model, color, year, mileage));
+					System.out.print("No cars in inventory. Printing default meassge to your file.");
+			}
+			else {
+				for(int i = 0; i < autoMake.size(); ++i) {
+					make = autoMake.get(i);
+					model = autoModel.get(i);
+					color = autoColor.get(i);
+					year = autoYear.get(i);
+					mileage = autoMileage.get(i);
+					carNum = i;
+			
+					outputStream.println(printCar(carNum, make, model, color, year, mileage));
+				}
 			}
 			outputStream.close();
 			isDone = "\n\tSuccessful Save to file: " + this.fileName;
