@@ -15,51 +15,96 @@ public class MainStart {
 		String fName;
 		String lName;
 		String department;
+		String personInfo;
+		String idLength;
 		int iD;
 		double eSalary;
 		char isManager;
 		char viewEmployees;
+		char addMore;
 		
+		do {
+			System.out.print("Input the Employee information in the following order: First Name, Last Name, Employee Id, and Salary");
+				fName = scnr.next();
+				lName = scnr.next();
+				iD = scnr.nextInt();
+				eSalary = scnr.nextDouble();
+			
+				
+				E1.Employee(fName, lName, iD, eSalary);
+	
+				System.out.println("\nIs this employee a manager? Y or N");
+					isManager = scnr.next().charAt(0);
+				try {
+					if (isManager == 'Y' || isManager == 'y') {
+						System.out.println("What department do they manage?");
+							department = scnr.next();
+							p1.Manager(department);
+							p1.getDepartment();
+							System.out.print("Displaying new employee information");
+							System.out.println(E1.EmployeeSummary());
+							System.out.println(p1.EmployeeSummary());
+				
+							personInfo = E1.EmployeeSummary() + "\n" + p1.EmployeeSummary();
+							E1.addEmployee(personInfo);
+			
+					}
+		
+					else if (isManager == 'N' || isManager == 'n') {//add values for lowercase
+						p1.Manager();
+						System.out.print("Displaying new employee information");
+						System.out.println(E1.EmployeeSummary());
+						personInfo = E1.EmployeeSummary();
+						E1.addEmployee(personInfo);
+					}
+					else {
+						throw new Exception("Invalid Option selected");
+					}
 
-		System.out.print("Input the Employee information in the following order: First Name, Last Name, Employee Id, and Salary");
-			fName = scnr.next();
-			lName = scnr.next();
-			iD = scnr.nextInt();
-			eSalary = scnr.nextDouble();
+					//Asking to add more employees
+					System.out.println("Would you like to add another employee Y or N?");
+					addMore = scnr.next().charAt(0);
+					if (addMore == 'Y' || addMore == 'y') {
+						System.out.println("Will continue program.\n");
+					}
+		
+					else if (addMore == 'N' || addMore == 'n') {
+						System.out.print("Okay");
+						break;
+					}
+					else {
+						throw new Exception("Invalid Option Selected.");
+					}
+				} catch(Exception b) {
+					System.out.println(b.getMessage());
+				}
 			
-			E1.Employee(fName, lName, iD, eSalary);
-			
-			System.out.println("\nIs this employee a manager? Y or N");
-			isManager = scnr.next().charAt(0);
-		
-		if (isManager == 'Y') {
-			System.out.println("What department do they manage?");
-				department = scnr.next();
-				p1.Manager(department);
-			System.out.print("Displaying new employee information");
-				p1.EmployeeSummary();
-			
-		}
-		
-		else if (isManager == 'N') {//add values for lowercase
-			p1.Manager();
-			System.out.print("Displaying new employee information");
-				E1.EmployeeSummary();
-		}
-		System.out.println("\nDo you want to view all employees? Y or N");
-		viewEmployees = scnr.next().charAt(0);
-		
-		if (viewEmployees == 'Y') {
-			System.out.println("Displaying all employees");
-				//call the all employees when arraylist add method is added again
-		}
-		
-		else if (viewEmployees == 'N') {
-			System.out.print("Program Terminated");
-		
-		}
+				}while(true);
+		//Asking to view all employees
+				do {
+					try {
+						System.out.println("\nDo you want to view all employees? Y or N");
+						viewEmployees = scnr.next().charAt(0);
+	
+						if (viewEmployees == 'Y' || viewEmployees == 'y') {
+							System.out.println("Displaying all employees \n");
+							System.out.println("Program Ended");
+							E1.allEmployees();
+							break;
+						}
+
+						else if (viewEmployees == 'N' || viewEmployees == 'n') {
+							System.out.println("Program Ended");
+							break;
+						}
+						else {
+							throw new Exception("Invalid Option Selected.");
+						}
+					}catch(Exception b) {
+						System.out.println("Will prompt user again.");
+					}
+				}while(true);
 		scnr.close();
-
 	}
 
 }

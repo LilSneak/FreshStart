@@ -3,22 +3,26 @@ package modlue1__realEmployee;
 public class Manager extends Employee{
 	
 	String department;
-	
+	String managerInfo;
+	String generalInfo;
 	
 	public void Manager() {
 		department = "Not a manager";
 	}
-	public void Manager(String department) {
+	public String Manager(String department) {
 		this.department = department;
+		return department;
 	}
 	public String getDepartment() {
 		return department;
 	}
 	
 	@Override
-	public void EmployeeSummary(){
-		super.EmployeeSummary();
-		System.out.println("\n\t\tDepartment they manage: " + department);
+	public String EmployeeSummary(){
+		managerInfo = "\tDepartment they manage: " + getDepartment();
 		
+		return managerInfo;
 	}
+	
+
 }
