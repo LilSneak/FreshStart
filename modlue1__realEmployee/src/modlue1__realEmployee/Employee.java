@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 
 public class Employee {
-	String firstName;
-	String lastName;
-	String info;
-	String Employee;
-	int employeeID;
-	double salary;
+	private String firstName;
+	private String lastName;
+	private String info;
+	private String Employee;
+	private int employeeID;
+	private double salary;
 	
-	ArrayList <String> Employees = new ArrayList <String>();
+	private ArrayList <String> Employees = new ArrayList <String>();
 	
 	//default and parameterized methods
 	public void Employee(){
@@ -31,16 +31,16 @@ public class Employee {
 	//Setters for employee info
 	
 	//Getters for employee info
-	public String getFirstName() {
+	private String getFirstName() {
 		return firstName;
 	}
-	public String getLastName() {
+	private String getLastName() {
 		return lastName;
 	}
-	public int getEmployeeID() {
+	private int getEmployeeID() {
 		return employeeID;
 	}
-	public double getSalary() {
+	private double getSalary() {
 		return salary;
 	}
 

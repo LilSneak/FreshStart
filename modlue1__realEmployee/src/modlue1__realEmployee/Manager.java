@@ -4,7 +4,7 @@ public class Manager extends Employee{
 	
 	String department;
 	String managerInfo;
-	String generalInfo;
+
 	
 	public void Manager() {
 		department = "Not a manager";
