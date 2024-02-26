@@ -4,61 +4,55 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class WithdrawFrame extends JFrame{
+public class DepositFrame extends JFrame {
 	//Creating components and variables to use
-	JFrame withdrawFrame;
-	JLabel wLabel;
-	JTextField wField;
-	JButton wDoneButton;
-	String userInput1;
-	String curBalance1;
-	int subtract;
-	
-	public void makingWithdrawFrame() {
+	JFrame depositFrame;
+	JLabel dLabel;
+	JTextField dField;
+	JButton dDoneButton;
+	String userInput2;
+	String curBalance2;
+	int add;
+	public void makingDepositFrame() {
 		GridBagConstraints layoutConst = null;
-		wLabel = new JLabel ("Enter Amount to Withdraw");
+		dLabel = new JLabel ("Enter Amount to Withdraw");
 		
-		wField = new JTextField(15);
-		wField.setText("0");
-		wField.setEditable(true);
-		wField.setSize(1, 10);
+		dField = new JTextField(15);
+		dField.setText("0");
+		dField.setEditable(true);
+		dField.setSize(1, 10);
 		
-		wDoneButton = new JButton("Done");
-		
-		withdrawFrame = new JFrame("Withdrawal Window");
-		withdrawFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		withdrawFrame. setLayout (new GridBagLayout ());
+		dDoneButton = new JButton("Done");
+
+		depositFrame = new JFrame("Withdrawal Window");
+		depositFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		depositFrame. setLayout (new GridBagLayout ());
 		
 			layoutConst = new GridBagConstraints();
 			layoutConst.insets = new Insets (10, 10, 10, 10);
 			layoutConst.gridx = 4;
 			layoutConst.gridy = 0;
-		withdrawFrame.add(wLabel, layoutConst);
+		depositFrame.add(dLabel, layoutConst);
 		
 			layoutConst = new GridBagConstraints();
 			layoutConst.insets = new Insets (10, 10, 10, 10);
 			layoutConst.gridx = 4;
 			layoutConst.gridy = 1;
-		withdrawFrame.add(wField, layoutConst);
+		depositFrame.add(dField, layoutConst);
 		
 			layoutConst = new GridBagConstraints();
 			layoutConst.insets = new Insets (10, 10, 10, 10);
 			layoutConst.gridx = 4;
 			layoutConst.gridy = 3;
-		withdrawFrame.add(wDoneButton, layoutConst);
+		depositFrame.add(dDoneButton, layoutConst);
 		
 		
 	}
-	
-	
-	
-	
-	
 }
