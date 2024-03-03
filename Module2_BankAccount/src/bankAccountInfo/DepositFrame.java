@@ -31,7 +31,7 @@ public class DepositFrame extends JFrame {
 		
 		dDoneButton = new JButton("Done");
 
-		depositFrame = new JFrame("Withdrawal Window");
+		depositFrame = new JFrame("Deposit Window");
 		depositFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		depositFrame. setLayout (new GridBagLayout ());
 		
