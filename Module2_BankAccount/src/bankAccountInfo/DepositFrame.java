@@ -22,7 +22,7 @@ public class DepositFrame extends JFrame {
 	int add;
 	public void makingDepositFrame() {
 		GridBagConstraints layoutConst = null;
-		dLabel = new JLabel ("Enter Amount to Withdraw");
+		dLabel = new JLabel ("Enter Amount to Deposit");
 		
 		dField = new JTextField(15);
 		dField.setText("0");

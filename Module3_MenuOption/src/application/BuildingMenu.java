@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.MenuButton;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 public class BuildingMenu extends Application {
@@ -28,7 +26,7 @@ public class BuildingMenu extends Application {
 	final Text InfoDisplayed = new Text();
 	final Text currentTime = new Text();
 
-	InfoDisplayed.setText("Select Menu Option 1 to display current Date and Time");//Initial text
+	InfoDisplayed.setText("Select First menu option to display current Date and Time");//Initial text
 	MenuItem menuItem1 = new MenuItem("Display current Time + Date");
 	MenuItem menuItem2 = new MenuItem("Save current Time + Date to File");
 	MenuItem menuItem3 = new MenuItem("Change hue of background");
@@ -53,7 +51,7 @@ public class BuildingMenu extends Application {
 	});
 
 	menuItem3.setOnAction(event -> {
-		InfoDisplayed.setText("Select Menu Option 1 to display current Date and Time");
+		InfoDisplayed.setText("Select First menu option to display current Date and Time");
 		//Randomizing red and blue to get different greens
 		Random random1 = new Random();
 		int blue = random1.nextInt(128);
