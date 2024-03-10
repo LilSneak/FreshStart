@@ -1,26 +1,25 @@
 package shapesM4;
 
 public class Rectangle extends Shape{
-	double area;
-	double perimeter;
-	double rWidth;
-	double rLength;
+	
+	private double width;
+	private double length;
 	
 	public void setLW(double length, double width) {
-		rLength = length;
-		rWidth = width;
-		
+		this.length = length;
+		this.width = width;
 	}
+	//getters
 	private double getLength() {
 		
-		return rLength;
+		return length;
 	}
-	
 	private double getWidth() {
 		
-		return rWidth;
+		return width;
 	}
 	
+	//abstract methods 
 	@Override
 	public double calcArea() {
 		area = getWidth() * getLength();
@@ -34,7 +33,7 @@ public class Rectangle extends Shape{
 		
 		return perimeter;
 	}
-	
+	//printing out shape info
 	public String toString() {
 		return "\nRectangle's Perimeter: " + perimeter + "\n\tRectangle's area: " + area;
 	}

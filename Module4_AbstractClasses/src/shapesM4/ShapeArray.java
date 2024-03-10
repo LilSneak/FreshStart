@@ -4,18 +4,23 @@ package shapesM4;
 
 public class ShapeArray {
 
-	public static <objects> void main(String[] args) {
-		double length = 2.0;
-		double width = 2.0;
+	public static void main(String[] args) {
+		
 		
 		Rectangle rect = new Rectangle();
-		rect.setLW(length, width);
+		rect.setLW(7.5, 2.0);
+		rect.calcArea();
+		rect.calcPerimeter();
 		
 		Circle circ = new Circle();
-		circ.setRadius(2.0);
+		circ.setRadius(5.0);
+		circ.calcArea();
+		circ.calcPerimeter();
 		
 		Triangle tri = new Triangle();
-		tri.setSides(2.0, 2.0, 2.0, 2.0);
+		tri.setSides(2.0, 2.0, 4.0, 2.0);
+		tri.calcArea();
+		tri.calcPerimeter();
 		
 		Object[] ShapesArray = {rect, circ, tri};
 		
