@@ -47,8 +47,10 @@ public class Employee {
 	//Printing Methods
 	public String EmployeeSummary() {
 		info = "\nName: " + getFirstName() + " " + getLastName() + "\n\tID# " + getEmployeeID() + "\n\tSalary: " + getSalary();
+		System.out.println(info);
 		
 		return info;
+		
 	}
 	public void allEmployees() {
 		try {

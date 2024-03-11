@@ -13,13 +13,14 @@ public class Manager extends Employee{
 		this.department = department;
 		return department;
 	}
-	public String getDepartment() {
+	private String getDepartment() {
 		return department;
 	}
 	
 	@Override
 	public String EmployeeSummary(){
 		managerInfo = "\tDepartment they manage: " + getDepartment();
+		System.out.println(managerInfo);
 		
 		return managerInfo;
 	}

@@ -15,8 +15,8 @@ public class MainStart {
 		String fName;
 		String lName;
 		String department;
-		String personInfo;
 		String idLength;
+		String personInfo;
 		int iD;
 		double eSalary;
 		char isManager;
@@ -34,27 +34,25 @@ public class MainStart {
 				E1.Employee(fName, lName, iD, eSalary);
 	
 				System.out.println("\nIs this employee a manager? Y or N");
-					isManager = scnr.next().charAt(0);
+				
+				isManager = scnr.next().charAt(0);
 				try {
 					if (isManager == 'Y' || isManager == 'y') {
 						System.out.println("What department do they manage?");
 							department = scnr.next();
 							p1.Manager(department);
-							p1.getDepartment();
+							//p1.getDepartment(); //getting rid of this to simplify coding
 							System.out.print("Displaying new employee information");
-							System.out.println(E1.EmployeeSummary());
-							System.out.println(p1.EmployeeSummary());
-				
+
 							personInfo = E1.EmployeeSummary() + "\n" + p1.EmployeeSummary();
 							E1.addEmployee(personInfo);
-			
 					}
 		
 					else if (isManager == 'N' || isManager == 'n') {//add values for lowercase
 						p1.Manager();
 						System.out.print("Displaying new employee information");
-						System.out.println(E1.EmployeeSummary());
-						personInfo = E1.EmployeeSummary();
+	
+						personInfo = E1.EmployeeSummary() + "\n" + p1.EmployeeSummary();
 						E1.addEmployee(personInfo);
 					}
 					else {
@@ -107,4 +105,6 @@ public class MainStart {
 		scnr.close();
 	}
 
+	
 }
+
