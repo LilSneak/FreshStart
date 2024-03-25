@@ -17,8 +17,8 @@ public class Student {
 		address = scnr.nextLine();
 		
 	}
-	public String getStudent() {
-		return name + " " + rollNo + " " + address;
+	public String getStudent() {//used to print
+		return "Name: " + name + "\n\tRoll# " + rollNo + "\n\tAddress: " + address;
 	}
 
 }
