@@ -1,6 +1,6 @@
 package bankAccountInfo;
 
-import java.awt.Color;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -17,9 +17,9 @@ public class WithdrawFrame extends JFrame{
 	JLabel wLabel;
 	JTextField wField;
 	JButton wDoneButton;
+	String userInput;
 	String userInput1;
 	String curBalance1;
-	int subtract;
 	
 	public void makingWithdrawFrame() {
 		GridBagConstraints layoutConst = null;

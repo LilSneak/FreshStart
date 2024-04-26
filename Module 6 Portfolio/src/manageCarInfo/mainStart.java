@@ -8,15 +8,14 @@ public class mainStart {
 		Scanner scnr = new Scanner(System.in);
 		
 		autoMobiles autoMobile1 = new autoMobiles();
-		manageOptions optionManager = new manageOptions();
 		
 		String newModel;
 		String newMake;
 		String newColor;
-		int newYear;
-		int newMileage;
 		String isDone;
 		String updateWhat;
+		int newYear;
+		int newMileage;
 		int carNum;
 		int optionSelect2;
 		char printToFile;
@@ -101,20 +100,22 @@ public class mainStart {
 					
 					case("4")://Update option
 						try {
-						do {
-							if(autoMobile1.autoMake.size() == 0) {//if there are no cars in the inventory
-								autoMobile1.autoMobiles();
-								throw new Exception("No vehicles in inventory.");
-							}
+							do {
+								if(autoMobile1.autoMake.size() == 0) {//if there are no cars in the inventory
+									autoMobile1.autoMobiles();
+									throw new Exception("No vehicles in inventory.");
+								}
+								
 								System.out.println("Enter car list number you want to update.");
 								carNum = scnr.nextInt();
 								if (carNum > autoMobile1.autoMake.size() || carNum == 0) {//checks to see if user entered an actual list number
 									throw new Exception("Out of bounds of inventory");
 								}
+								
 								System.out.println("Select what group of options you want (1 or 2) \n\t1: Make, Model, and Color\n\t2: Year and Mileage");
 		
 								optionSelect2 = scnr.nextInt();
-								try {
+								try {//checks if input is 1 or 2. If not restarts the update process
 									if (optionSelect2 == 1) {
 										System.out.println("Enter what you want to update. Options are: \"Make\", \"Model\", or \"Color\" (case-sensitive)");
 										updateWhat = scnr.next();
@@ -143,7 +144,7 @@ public class mainStart {
 									break;
 								}
 							
-						} while(true);
+							} while(true);
 						}catch(Exception e) {
 							System.out.println(e.getMessage());
 							System.out.println("Can't complete update process.");
@@ -151,11 +152,11 @@ public class mainStart {
 						}
 					break;
 						
+					}
 				}
-			}
-			else {
-				throw new Exception("Invalid Option Selection. Try again");
-			}
+				else {
+					throw new Exception("Invalid Option Selection. Try again");//Initial program select is invalid. Will prompt user again
+				}
 			
 			}catch(Exception excpt) {
 				System.out.println(excpt.getMessage());

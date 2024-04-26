@@ -14,7 +14,6 @@ public class Students {
 		address = Address;
 		gpa = GPA;
 		
-		System.out.println("New student succesfully added to list");
 	}
 	
 	private String getName() {
