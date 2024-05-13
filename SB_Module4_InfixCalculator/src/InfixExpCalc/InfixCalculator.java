@@ -17,7 +17,7 @@ public class InfixCalculator {
 		int numOf2Levels = 0;
 		
 		try {
-			for(char c : exp) {
+			for(char c : exp) {//Loop to see how many operators of the same level and brackets there are
 				if (c == '+' || c == '-') {
 					numOf1Levels++;
 				}
@@ -32,16 +32,16 @@ public class InfixCalculator {
 				}
 			}
 			
-			if (numOf1Levels > 0 && numOf2Levels > 0) {
-				if (numOfOpeners == 0 && numOfClosers == 0) {
+			if (numOf1Levels > 0 && numOf2Levels > 0) {//If expression contains operators of 2 different levels or priorities it requires the use of parentheses
+				if (numOfOpeners == 0 && numOfClosers == 0) {//No parentheses when needed
 					throw new Exception ("Invalid Expression. Missing Parentheses");
 				}
-				else if(numOfOpeners != numOfClosers) {
+				else if(numOfOpeners != numOfClosers) {//Uneven amount of parentheses
 					throw new Exception("Invalid Expression. Unbalanced Brackets");
 				}
 			}
-			if (numOf1Levels > 0 || numOf2Levels > 0 && numOfOpeners == numOfClosers){
-				for(int i = 0; i < exp.length; i++) {
+			if (numOfOpeners == numOfClosers){//if no brackets needed or an even amount of brackets continue to evaluate
+				for(int i = 0; i < exp.length; i++) {//iterating through expression
 					char currentChar = exp[i];
 			
 					if(Character.isDigit(currentChar)) {//if the current character is a #
@@ -150,7 +150,7 @@ public class InfixCalculator {
 		case('*'):
 			return b * a;
 		case('/'):
-			if (a == 0) {
+			if (a == 0) {//Value returned to signify an error condition
 				defaultReturn = -1;
 				throw new Exception("Can't divide by zero. ");
 			}
