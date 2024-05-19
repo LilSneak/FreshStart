@@ -1,34 +1,37 @@
 package m2_Bags;
 
-import java.util.ArrayList;
+
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+//UPDATED CODE!!!! WITH CORRECTIONS AND FEEDBACK
+//I implemented feedback by using a HashMap instead of an ArrayList implementation. As a result my code has the ability to perform better.
+//Also used the equals method instead of comparing the quality of an element (==). 
 
 public class Bag<T>{
 	
-		//count variable is used to count the frequency of an element in the ArrayList
 	private int count;
-		//Using an Arraylist due to its ability to keep expanding its size as elements are added
-	private ArrayList<T> bag;
+	
+	private int values = 0;
+	private HashMap<Integer, T> mergedBag;
+	//private ArrayList<T> bag;
+	private HashMap<Integer, T> bag;
 	
 	public Bag() {//Constructor method to initialize the bag with no finite size
-		bag = new ArrayList<T>();
+		bag = new HashMap<>();
 	}
 	
 	public void add(T newItem) { //Adding a new item to the bag
-		bag.add(newItem);
+		bag.put(values, newItem);
+		values++;
 	}
 	
-	public Boolean remove(T item) {//Removing a certain item
-		for(int i = 0; i < bag.size(); i ++) {//Iterating through bag
-			if(bag.get(i)== item) {//Seeing if the current element matches the target item
-				bag.remove(i);
-				
-				return true;//Returns true that an occurrence of the item was found. And breaks the for loop 
-			}
-		}
-		return false;// item was not successfully removed
+	public void remove(T item) {//Removing a certain item
+		
+				bag.remove(item);
+			
 	}
 	
 	public int size() {//Shows how many items are in the bag
@@ -38,21 +41,22 @@ public class Bag<T>{
 	public int count(T searchItem) {//gets the frequency of a certain item
 		count = 0;//variable is set to 0
 		
-		for(int i = 0; i < bag.size(); i ++) {//Iterating through bag
-			if(bag.get(i) == searchItem) {//Seeing if the current element matches the target item
+		for(T item: bag.values()){//int i = 0; i < bag.size(); i ++) {//Iterating through bag
+			if(bag.get(item).equals(searchItem)) {//Seeing if the current element matches the target item. (UPDATED TO IMPLEMENT THE EQUALS METHOD)!!!
 				count++;//Increases when target is found
 			}
 		}
 		return count;//frequency is then returned.
 	}
+	
 	public Boolean contains(T anItem) {
-		for(int i = 0; i < bag.size(); i ++) {//Iterating through bag
-			if(bag.get(i) == anItem) {//Seeing if the current element matches the target item
+		
+		if(bag.containsValue(anItem)) {//Seeing if the current element matches the target item. (UPDATED TO IMPLEMENT THE EQUALS METHOD)!!!
 				return true;//confirms that item is in bag, ends loop, and returns a true value.
-			}
 		}
 		return false;//item was not found
 	}
+	
 	private Boolean isEmpty() {//Checking if the bag is empty
 		if(size() > 0) {//Uses the bag's size to return a boolean value
 			return false; 
@@ -62,26 +66,35 @@ public class Bag<T>{
 	
 	public void printBag() {//Print out the contents of the bag
 		if(isEmpty() == false) {//Uses the isEmpty method to determine if there is anything in the bag to print
-			for(int i = 0; i < bag.size(); i ++) {//Iterating through bag
-				System.out.print(bag.get(i) + " ");//Prints out the current element
-			}
-			System.out.println("");
+			
+				System.out.print(bag.values());//Prints out the current element
 		}
 		else {
 			System.out.println("Bag is Empty");//Prints out a statement to let user know the bag is empty
 		}
 	}
-	public void merge(Bag<T> newBag) {
-		for(T item: newBag.bag) {
-			bag.add(item);
+	public HashMap<Integer, T> merge(HashMap<Integer, T> bag2) {
+		Bag<T> temp = new Bag<T>();
+		
+		bag2.putAll(temp.bag);
+		
+		for(T item: bag.values()){//int i = 0; i < bag.size(); i ++) {//Iterating through bag
+			temp.add(item);
 		}
+		values = 55;//used to randomize keys.
+		for(T item: bag2.values()){//int i = 0; i < bag.size(); i ++) {//Iterating through bag
+			temp.add(item);
+		}
+		mergedBag = temp.bag;
+		return temp.bag;
 	}
+	
 	public Bag<T> distinct() {
 		Bag<T> distinctOnly = new Bag<T>();
 		
 		Set<T> unique = new HashSet<T>();
 		
-		for(T item: bag) {
+		for(T item: mergedBag.values()) {
 			if(unique.add(item) == true) {
 				distinctOnly.add(item);
 			}
@@ -129,10 +142,10 @@ public class Bag<T>{
 		System.out.println("");
 		
 		//Method call to merge bag1 and ba2
-		colorBag1.merge(colorBag2);
-		System.out.println("Bag One and Two Merged Together:");
+		System.out.println("Bag One and Two Merged Together:" + colorBag1.merge(colorBag2.bag));
+		
 		//Printing out merged bag
-		colorBag1.printBag();
+		
 		System.out.println("");
 		
 		//Method called to find the distinct variables of the merged bag and then print the returned value which is a another bag
