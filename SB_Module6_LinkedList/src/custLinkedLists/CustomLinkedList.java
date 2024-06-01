@@ -1,12 +1,12 @@
 package custLinkedLists;
 
-import java.io.File;
+import java.io.*;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class CustomLinkedList {
+public class CustomLinkedList {//UPDATED LINES 90, 142, 145
 	private Node head;
 	
 	public void insertion(int data) {
@@ -77,11 +77,18 @@ public class CustomLinkedList {
 	public void fromFile(CustomLinkedList list, File input) throws FileNotFoundException{
 		
 		Scanner scnr = new Scanner(input);
+		int hasInts = 0;
+		
 		
 		while(scnr.hasNextInt()) {
 			int num = scnr.nextInt();
 			
 			list.insertion(num);
+			hasInts++;
+		}
+		
+		if(hasInts == 0) {//UPDATED: if the file contains no integers
+			System.out.println("\nFile does not contain the appropriate elements to sort. Make sure all elements are an integer");
 		}
 		
 		scnr.close();
@@ -132,11 +139,11 @@ public class CustomLinkedList {
 		CustomLinkedList list2 = new CustomLinkedList();
 		
 		//Opening a file on desktop
-		File input = new File("/Users/tabithaanderson/Desktop/tryOut.txt");
+		File input = new File("tryOut2.txt");// UPDATED: FIXED the file input
 			try {
 				list2.fromFile(list2, input);
-			} catch (FileNotFoundException e) {
-				
+			} catch (FileNotFoundException e) {//UPDATED: custom error message
+				System.out.println("File Not Found. Check that name of file is accurate or that file exist then try again");
 				e.printStackTrace();
 			}
 		System.out.println("\nLinked List from File");
