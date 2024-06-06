@@ -64,19 +64,18 @@ public class Queue<T> {
 		return Queue[front];
 	}
 	
-	public T dequeue() {
+	public T dequeue() {//removes element at front of queue
 		if(isEmpty()) {
 			return null;
 		}
 		else {
 			T removedFront = getFront();
-			for(int i = 0; i < back - 1; i++) {
+			for(int i = 0; i < back - 1; i++) {//iterates through queue and moves the elements up one.
 				Queue[i] = Queue[i+1];
 				
 				
 			}
-			
-			if(back < capacity) {
+			if(back < capacity) {//changes the back of the queue value if queue isn't full
 				Queue[back] = null;
 				
 				back--;
