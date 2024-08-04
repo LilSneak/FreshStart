@@ -4,12 +4,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MultiThreading extends Thread {
 	
-	private static AtomicInteger counter;
+	private static AtomicInteger counter;//Using an atomic integer since it handles concurrent access to variable with synchronization.
 	
 	
-	public void run() {
+	public void run() {//Run method so that method is what is ran when class objects are created
 		
-		try {
+		try {//Exception handling if the counter is not at 0 or 20
 			if(counter.get() == 0) {
 				System.out.print("Counting Up: " + counter + " ");
 				do {
@@ -32,16 +32,18 @@ public class MultiThreading extends Thread {
 		}
 	
 	}
+	
 	public static void main(String[] args) throws InterruptedException {
 		counter = new AtomicInteger(0);
 		
+		//creating class objects to create threads
 		MultiThreading countUp = new MultiThreading();
 		MultiThreading countDown = new MultiThreading();
 
+		//Starting the threads and then joining them so that the threads have to wait for current thread to fully execute before the other starts
 		countUp.start();
 		countUp.join();
 	
-		
 		countDown.start();
 		countDown.join();
 		
