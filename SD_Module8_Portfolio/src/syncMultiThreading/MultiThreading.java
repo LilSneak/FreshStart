@@ -41,12 +41,21 @@ public class MultiThreading extends Thread {
 		MultiThreading countDown = new MultiThreading();
 
 		//Starting the threads and then joining them so that the threads have to wait for current thread to fully execute before the other starts
-		countUp.start();
-		countUp.join();
-	
-		countDown.start();
-		countDown.join();
 		
+		
+		countUp.start();
+		try {//exception handling if the thread is interrupted
+			countUp.join();
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		countDown.start();
+		try {//exception handling if the thread is interrupted
+			countDown.join();
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
